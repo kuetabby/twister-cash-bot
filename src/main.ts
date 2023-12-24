@@ -13,8 +13,8 @@ import { MixDtoConversation, MixerType } from './models/Mix';
 
 const TelegramBot = require('node-telegram-bot-api');
 
-const botToken = '6567740479:AAGpS3H2tzHtp_7Ey-9v0PWpAnEaNLoVlgk';
-// const botToken = '6825220809:AAF8JX0segKSOxacBFtt0TceffyNsK1q8VQ';
+// const botToken = '6567740479:AAGpS3H2tzHtp_7Ey-9v0PWpAnEaNLoVlgk';
+const botToken = '6825220809:AAF8JX0segKSOxacBFtt0TceffyNsK1q8VQ';
 const bot = new TelegramBot(botToken, { polling: true });
 
 // Store the state of each chat
