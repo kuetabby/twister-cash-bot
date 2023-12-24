@@ -13,7 +13,8 @@ import { MixDtoConversation, MixerType } from './models/Mix';
 
 const TelegramBot = require('node-telegram-bot-api');
 
-const botToken = '6825220809:AAF8JX0segKSOxacBFtt0TceffyNsK1q8VQ';
+const botToken = '6567740479:AAGpS3H2tzHtp_7Ey-9v0PWpAnEaNLoVlgk';
+// const botToken = '6825220809:AAF8JX0segKSOxacBFtt0TceffyNsK1q8VQ';
 const bot = new TelegramBot(botToken, { polling: true });
 
 // Store the state of each chat
@@ -600,6 +601,19 @@ Note: You must complete this trade within a maximum of 30 minutes. Fees can vary
         // console.log(responseStatusOrder, 'status order');
 
         if (responseStatusOrder?.isSuccess) {
+          const statusOrder = {
+            fromAmount:
+              responseStatusOrder?.expectedAmountFrom ||
+              responseStatusOrder?.amountFrom,
+            fromCurrency: responseStatusOrder.fromCurrency,
+            fromNetwork: responseStatusOrder.fromNetwork,
+            toAmount:
+              responseStatusOrder?.expectedAmountTo ||
+              responseStatusOrder?.amountTo,
+            toCurrency: responseStatusOrder.toCurrency,
+            toNetwork: responseStatusOrder.toNetwork,
+          };
+
           await bot.deleteMessage(chatId, message.message_id);
           await bot.sendMessage(
             chatId,
@@ -607,18 +621,18 @@ Note: You must complete this trade within a maximum of 30 minutes. Fees can vary
                       *Mixing Transaction started :*
 
 • Mixing ID: \`${responseStatusOrder?.id ?? '-'}\`
-• Send: ${responseStatusOrder?.expectedAmountFrom} ${
+• Send: ${statusOrder.fromAmount} ${
               list_currency.find(
                 (item) =>
-                  item.ticker === responseStatusOrder.fromCurrency &&
-                  item.network === responseStatusOrder.fromNetwork,
+                  item.ticker === statusOrder.fromCurrency &&
+                  item.network === statusOrder.fromNetwork,
               ).name
             }
-• Receive: ${responseStatusOrder?.expectedAmountTo ?? '-'} ${
+• Receive: ${statusOrder.toAmount ?? '-'} ${
               list_currency.find(
                 (item) =>
-                  item.ticker === responseStatusOrder.toCurrency &&
-                  item.network === responseStatusOrder.toNetwork,
+                  item.ticker === statusOrder.toCurrency &&
+                  item.network === statusOrder.toNetwork,
               ).name
             }
 • Receiver Wallet: \`${responseStatusOrder?.payoutAddress ?? '-'}\`
