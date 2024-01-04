@@ -57,7 +57,7 @@ async function bootstrap() {
       chatStates[chatId] = ChatStage.START;
       // Path to the video file
       const videoPath =
-        'https://res.cloudinary.com/dwppcshmi/video/upload/v1703165744/rabbit_images/ruowvyybwcdeipvja48u.mp4';
+        'https://res.cloudinary.com/dwppcshmi/video/upload/v1704360826/rabbit_images/qynohbtmqawtv8atrysl.mp4';
 
       await bot.sendVideo(chatId, videoPath, {
         parse_mode: 'Markdown',

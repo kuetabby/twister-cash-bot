@@ -110,6 +110,25 @@ const networks_xrp_ftm = [
   },
 ];
 
+const networks_tia_sei = [
+  {
+    ticker: 'tia',
+    name: 'Celestia (TIA)',
+    image: '/uploads/tia_4ed44a458a.svg',
+    network: 'tia',
+    tokenContract: null,
+    legacyTicker: 'tia',
+  },
+  {
+    ticker: 'sei',
+    name: 'Sei (SEI)',
+    image: '/uploads/sei_fda6fbd2c1.svg',
+    network: 'sei',
+    tokenContract: null,
+    legacyTicker: 'sei',
+  },
+];
+
 export const list_currency = [
   ...eth,
   ...bsc,
@@ -124,4 +143,5 @@ export const list_tokens = {
   networks_btc_eth,
   networks_sol_ada,
   networks_xrp_ftm,
+  networks_tia_sei,
 };

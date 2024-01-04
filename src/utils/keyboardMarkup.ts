@@ -234,6 +234,17 @@ const tokensKeyboardMarkup = [
     })),
   ],
   [
+    ...list_tokens.networks_tia_sei.map((item) => ({
+      text: item.name,
+      callback_data: JSON.stringify({
+        command: CallbackInfo.MIX,
+        ticker: item.ticker,
+        network: item.network,
+        // name: item.name,
+      }),
+    })),
+  ],
+  [
     {
       text: `❌ Cancel Mixing`,
       callback_data: JSON.stringify({
