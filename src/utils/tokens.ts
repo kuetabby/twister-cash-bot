@@ -15,42 +15,42 @@ const eth = [
     tokenContract: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
     legacyTicker: 'usdterc20',
   },
-  {
-    ticker: 'usdc',
-    name: 'USDC (ERC20)',
-    image: 'https://content-api.changenow.io/uploads/usdcerc20_acd5759c8c.svg',
-    network: 'eth',
-    tokenContract: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-    legacyTicker: 'usdc',
-  },
+  // {
+  //   ticker: 'usdc',
+  //   name: 'USDC (ERC20)',
+  //   image: 'https://content-api.changenow.io/uploads/usdcerc20_acd5759c8c.svg',
+  //   network: 'eth',
+  //   tokenContract: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+  //   legacyTicker: 'usdc',
+  // },
 ];
 
-const bsc = [
-  {
-    ticker: 'bnb',
-    name: 'BNB (BEP20)',
-    image: 'https://content-api.changenow.io/uploads/bnbbsc_331e969a6b.svg',
-    network: 'bsc',
-    tokenContract: null,
-    legacyTicker: 'bnbbsc',
-  },
-  {
-    ticker: 'usdt',
-    name: 'USDT (BEP20)',
-    image: 'https://content-api.changenow.io/uploads/usdtbsc_b8f3d8f316.svg',
-    network: 'bsc',
-    tokenContract: '0x55d398326f99059fF775485246999027B3197955',
-    legacyTicker: 'usdtbsc',
-  },
-  {
-    ticker: 'usdc',
-    name: 'USDC (BEP20)',
-    image: 'https://content-api.changenow.io/uploads/usdcbsc_397b9c0f7d.svg',
-    network: 'bsc',
-    tokenContract: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
-    legacyTicker: 'usdcbsc',
-  },
-];
+// const bsc = [
+//   {
+//     ticker: 'bnb',
+//     name: 'BNB (BEP20)',
+//     image: 'https://content-api.changenow.io/uploads/bnbbsc_331e969a6b.svg',
+//     network: 'bsc',
+//     tokenContract: null,
+//     legacyTicker: 'bnbbsc',
+//   },
+//   {
+//     ticker: 'usdt',
+//     name: 'USDT (BEP20)',
+//     image: 'https://content-api.changenow.io/uploads/usdtbsc_b8f3d8f316.svg',
+//     network: 'bsc',
+//     tokenContract: '0x55d398326f99059fF775485246999027B3197955',
+//     legacyTicker: 'usdtbsc',
+//   },
+//   {
+//     ticker: 'usdc',
+//     name: 'USDC (BEP20)',
+//     image: 'https://content-api.changenow.io/uploads/usdcbsc_397b9c0f7d.svg',
+//     network: 'bsc',
+//     tokenContract: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
+//     legacyTicker: 'usdcbsc',
+//   },
+// ];
 
 const networks_btc_eth = [
   {
@@ -62,13 +62,12 @@ const networks_btc_eth = [
     legacyTicker: 'btc',
   },
   {
-    ticker: 'eth',
-    name: 'Ethereum (ARB20)',
-    image:
-      'https://content-api.changenow.io/uploads/etharbitrum_796401be67.svg',
+    ticker: 'arb',
+    name: 'Arbitrum (ARB20)',
+    image: 'https://content-api.changenow.io/uploads/arb_b711c7cb0b.svg',
     network: 'arbitrum',
     tokenContract: null,
-    legacyTicker: 'etharb',
+    legacyTicker: 'arb',
   },
 ];
 
@@ -88,6 +87,58 @@ const networks_sol_ada = [
     network: 'ada',
     tokenContract: null,
     legacyTicker: 'ada',
+  },
+];
+
+const networks_bsc_inj = [
+  {
+    ticker: 'bnb',
+    name: 'BNB (BEP20)',
+    image: 'https://content-api.changenow.io/uploads/bnbbsc_331e969a6b.svg',
+    network: 'bsc',
+    tokenContract: null,
+    legacyTicker: 'bnbbsc',
+  },
+  {
+    ticker: 'inj',
+    name: 'Injective (INJ)',
+    image: 'https://content-api.changenow.io/uploads/injmainnet_c155cd4e32.svg',
+    network: 'inj',
+    tokenContract: null,
+    legacyTicker: 'injmainnet',
+  },
+];
+
+const networks_op_matic = [
+  {
+    ticker: 'op',
+    name: 'Optimism (OP)',
+    image: '/uploads/op_e3944c4cf9.svg',
+    hasExternalId: false,
+    isFiat: false,
+    featured: false,
+    isStable: false,
+    supportsFixedRate: true,
+    network: 'op',
+    tokenContract: '0x4200000000000000000000000000000000000042',
+    buy: true,
+    sell: true,
+    legacyTicker: 'op',
+  },
+  {
+    ticker: 'matic',
+    name: 'Polygon (MATIC)',
+    image: '/uploads/matic_token_f9906e3f5d.svg',
+    hasExternalId: false,
+    isFiat: false,
+    featured: false,
+    isStable: false,
+    supportsFixedRate: true,
+    network: 'matic',
+    tokenContract: null,
+    buy: true,
+    sell: true,
+    legacyTicker: 'maticmainnet',
   },
 ];
 
@@ -119,6 +170,14 @@ const networks_tia_sei = [
     tokenContract: null,
     legacyTicker: 'tia',
   },
+  // {
+  //   ticker: 'sui (SUI)',
+  //   name: 'Sui',
+  //   image: '/uploads/sui_6d4e2efb11.svg',
+  //   network: 'sui',
+  //   tokenContract: null,
+  //   legacyTicker: 'suimainnet',
+  // },
   {
     ticker: 'sei',
     name: 'Sei (SEI)',
@@ -129,19 +188,63 @@ const networks_tia_sei = [
   },
 ];
 
+const networks_avax_tron = [
+  {
+    ticker: 'avax',
+    name: 'Avalanche (AVAX)',
+    image: 'https://content-api.changenow.io/uploads/avaxs_4e906c3ad4.svg',
+    network: 'cchain',
+    tokenContract: null,
+    legacyTicker: 'avaxc',
+  },
+  {
+    ticker: 'trx',
+    name: 'TRON (TRC20)',
+    image: 'https://content-api.changenow.io/uploads/trx_f14430166e.svg',
+    network: 'trx',
+    tokenContract: null,
+    legacyTicker: 'trx',
+  },
+];
+
+const networks_dym_sui = [
+  {
+    ticker: 'dym',
+    name: 'Dymension (DYM)',
+    image: '/uploads/dym_7321eabaa0.svg',
+    network: 'dym',
+    tokenContract: null,
+    legacyTicker: 'dymmainnet',
+  },
+  {
+    ticker: 'sui',
+    name: 'Sui (SUI)',
+    image: 'https://content-api.changenow.io/uploads/sui_6d4e2efb11.svg',
+    network: 'sui',
+    tokenContract: null,
+    legacyTicker: 'suimainnet',
+  },
+];
+
 export const list_currency = [
   ...eth,
-  ...bsc,
   ...networks_btc_eth,
+  ...networks_op_matic,
+  ...networks_bsc_inj,
   ...networks_sol_ada,
   ...networks_xrp_ftm,
+  ...networks_avax_tron,
+  ...networks_dym_sui,
 ];
 
 export const list_tokens = {
   eth,
-  bsc,
   networks_btc_eth,
+  networks_op_matic,
+  networks_bsc_inj,
   networks_sol_ada,
   networks_xrp_ftm,
   networks_tia_sei,
+  networks_avax_tron,
+  networks_dym_sui,
 };

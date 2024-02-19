@@ -24,23 +24,23 @@ export enum CallbackInfo {
 export const adminId = 6019985262;
 
 const welcome = `
-*Twister Cash: Empowering Transactions with Decentralized Ingenuity*
+*INCOGNITOSHIFT PROTOCOL: Powered by AI to Unlock the new Experience of Web3*
 
-a groundbreaking project that reshapes your transactions with unprecedented innovation
+Embark on a Journey of Anonymous Trading, Rewarding Staking, and Next-Level AI-Based Asset Optimization
 `;
 
-const mixing = `*Fill all the details below to start mixing*`;
+const mixing = `*Fill all the details below to start bridging*`;
 
 const about = `
-*Twister AI powered crypto mixing tools*
+*IS Protocol AI powered crypto bridging tools*
 
-Using Telegram to mix and transfer cryptocurrency while maintaining privacy, security and anonymity.
+Using Telegram to bridge and transfer cryptocurrency while maintaining privacy, security and anonymity.
 
-Twister offers solution that enable transactional privacy and security by breaking on-chain link between sender and recipient address.
+IS Protocol offers solution that enable transactional privacy and security by breaking on-chain link between sender and recipient address.
 
-*To use the Twister AI mixer:*
-1. First choose the cryptocurrency you want to deposit (from token) 
-2. Select the cryptocurrency to withdraw (to token) 
+*To use the IS Protocol AI bridge:*
+1. First choose the cryptocurrency you want to deposit (from currency) 
+2. Select the cryptocurrency to withdraw (to currency) 
 3. Enter the amount of the transaction. 
 4. Enter the recipient wallet's (receiver wallet) address.
 Our system completes transactions in less than 30 minutes.

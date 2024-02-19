@@ -14,7 +14,7 @@ import { MixDtoConversation, MixerType } from './models/Mix';
 const TelegramBot = require('node-telegram-bot-api');
 
 // const botToken = '6567740479:AAGpS3H2tzHtp_7Ey-9v0PWpAnEaNLoVlgk';
-const botToken = '6825220809:AAF8JX0segKSOxacBFtt0TceffyNsK1q8VQ';
+const botToken = '6859353789:AAE328JQDD9r4p5E7Oaei3LQXthfSoTTFvw';
 const bot = new TelegramBot(botToken, { polling: true });
 
 // Store the state of each chat
@@ -106,7 +106,7 @@ Example: If you have 0.1 ETH and want to convert it to USDT, just type 0.1
                 inline_keyboard: [
                   [
                     {
-                      text: `❌ Cancel Mixing`,
+                      text: `❌ Cancel Bridging`,
                       callback_data: JSON.stringify({
                         command: CallbackInfo.EXIT,
                       }),
@@ -183,7 +183,7 @@ Example: If you have 0.1 ETH and want to convert it to USDT, just type 0.1
                   inline_keyboard: [
                     [
                       {
-                        text: `❌ Cancel Mixing`,
+                        text: `❌ Cancel Bridging`,
                         callback_data: JSON.stringify({
                           command: CallbackInfo.EXIT,
                         }),
@@ -329,14 +329,14 @@ Example: If you have 0.1 ETH and want to convert it to USDT, just type 0.1
         // mixStates[chatId].amount = '';
         bot.editMessageText(
           `
-          🔼 *Choose the token you want to deposit.*
+          🔼 *Choose the currency you want to deposit.*
         `,
           {
             chat_id: chatId,
             message_id: message.message_id,
             parse_mode: 'Markdown',
             reply_markup: JSON.stringify({
-              inline_keyboard: keyboardMarkup.tokens,
+              inline_keyboard: keyboardMarkup.tokensFrom,
             }),
           },
         );
@@ -348,14 +348,14 @@ Example: If you have 0.1 ETH and want to convert it to USDT, just type 0.1
         // mixStates[chatId].amount = '';
         bot.editMessageText(
           `
-            🔽 *Choose the token you want to receive.*
+            🔽 *Choose the currency you want to receive.*
           `,
           {
             chat_id: chatId,
             message_id: message.message_id,
             parse_mode: 'Markdown',
             reply_markup: JSON.stringify({
-              inline_keyboard: keyboardMarkup.tokens,
+              inline_keyboard: keyboardMarkup.tokensTo,
             }),
           },
         );
@@ -381,7 +381,7 @@ Example: If you have 0.1 ETH and want to convert it to USDT, just type 0.1
               inline_keyboard: [
                 [
                   {
-                    text: `❌ Cancel Mixing`,
+                    text: `❌ Cancel Bridging`,
                     callback_data: JSON.stringify({
                       command: CallbackInfo.EXIT,
                     }),
@@ -421,7 +421,7 @@ Example: If you have 0.1 ETH and want to convert it to USDT, just type 0.1
               inline_keyboard: [
                 [
                   {
-                    text: `❌ Cancel Mixing`,
+                    text: `❌ Cancel Bridging`,
                     callback_data: JSON.stringify({
                       command: CallbackInfo.EXIT,
                     }),
@@ -463,7 +463,7 @@ Example: If you have 0.1 ETH and want to convert it to USDT, just type 0.1
           mixStates[chatId].rateId = responseEstimate?.rateId;
           await bot.editMessageText(
             `
-              <b>Twister Cash: Empowering Transactions with Decentralized Ingenuity</b>
+              <b>INCOGNITOSHIFT PROTOCOL: Powered by AI to Unlock the new Experience of Web3</b>
     
   • Send: <b>${mixStates[chatId].amount} ${
               list_currency.find(
@@ -531,9 +531,9 @@ Example: If you have 0.1 ETH and want to convert it to USDT, just type 0.1
         if (responseOrder) {
           await bot.editMessageText(
             `
-                      *Mixing Transaction started :*
+                      *Bridging Transaction started :*
 
-• Mixing ID: \`${responseOrder?.id ?? '-'}\`
+• Bridging ID: \`${responseOrder?.id ?? '-'}\`
 • Send: ${responseOrder.fromAmount} ${
               list_currency.find(
                 (item) =>
@@ -556,7 +556,7 @@ Example: If you have 0.1 ETH and want to convert it to USDT, just type 0.1
                   item.ticker === responseOrder.fromCurrency &&
                   item.network === responseOrder.fromNetwork,
               ).name
-            } to start mixing process. 
+            } to start bridging process. 
 
 Deposit Wallet: \`${responseOrder?.payinAddress ?? '-'}\`
   
@@ -618,9 +618,9 @@ Note: You must complete this trade within a maximum of 30 minutes. Fees can vary
           await bot.sendMessage(
             chatId,
             `
-                      *Mixing Transaction started :*
+                      *Bridging Transaction started :*
 
-• Mixing ID: \`${responseStatusOrder?.id ?? '-'}\`
+• Bridging ID: \`${responseStatusOrder?.id ?? '-'}\`
 • Send: ${statusOrder.fromAmount} ${
               list_currency.find(
                 (item) =>
