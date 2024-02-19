@@ -35,22 +35,22 @@ const socialsKeyboardMarkup = [
   [
     {
       text: 'Website',
-      url: 'https://twistercash.tech',
-    },
-    {
-      text: 'Telegram',
-      url: 'https://t.me/TwisterERC20',
+      url: 'https://www.incognitoshift.com',
     },
   ],
   [
     {
-      text: 'Twitter / X',
-      url: 'https://x.com/twistererc20',
+      text: 'Telegram',
+      url: 'https://t.me/incognitoshift',
     },
     {
-      text: 'Medium',
-      url: 'https://medium.com/@TwisterCash',
+      text: 'Twitter / X',
+      url: 'https://x.com/incognitoshift',
     },
+    // {
+    //   text: 'Medium',
+    //   url: 'https://medium.com/@TwisterCash',
+    // },
   ],
   [
     {
