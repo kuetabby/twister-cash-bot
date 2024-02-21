@@ -52,7 +52,7 @@ const eth = [
 //   },
 // ];
 
-const networks_btc_eth = [
+const networks_btc_arb = [
   {
     ticker: 'btc',
     name: 'Bitcoin (BTC)',
@@ -113,31 +113,18 @@ const networks_op_matic = [
   {
     ticker: 'op',
     name: 'Optimism (OP)',
-    image: '/uploads/op_e3944c4cf9.svg',
-    hasExternalId: false,
-    isFiat: false,
-    featured: false,
-    isStable: false,
-    supportsFixedRate: true,
+    image: 'https://content-api.changenow.io/uploads/op_e3944c4cf9.svg',
     network: 'op',
     tokenContract: '0x4200000000000000000000000000000000000042',
-    buy: true,
-    sell: true,
     legacyTicker: 'op',
   },
   {
     ticker: 'matic',
     name: 'Polygon (MATIC)',
-    image: '/uploads/matic_token_f9906e3f5d.svg',
-    hasExternalId: false,
-    isFiat: false,
-    featured: false,
-    isStable: false,
-    supportsFixedRate: true,
+    image:
+      'https://content-api.changenow.io/uploads/matic_token_f9906e3f5d.svg',
     network: 'matic',
     tokenContract: null,
-    buy: true,
-    sell: true,
     legacyTicker: 'maticmainnet',
   },
 ];
@@ -165,7 +152,7 @@ const networks_tia_sei = [
   {
     ticker: 'tia',
     name: 'Celestia (TIA)',
-    image: '/uploads/tia_4ed44a458a.svg',
+    image: 'https://content-api.changenow.io/uploads/tia_4ed44a458a.svg',
     network: 'tia',
     tokenContract: null,
     legacyTicker: 'tia',
@@ -173,7 +160,7 @@ const networks_tia_sei = [
   // {
   //   ticker: 'sui (SUI)',
   //   name: 'Sui',
-  //   image: '/uploads/sui_6d4e2efb11.svg',
+  //   image: 'https://content-api.changenow.io/uploads/sui_6d4e2efb11.svg',
   //   network: 'sui',
   //   tokenContract: null,
   //   legacyTicker: 'suimainnet',
@@ -181,7 +168,7 @@ const networks_tia_sei = [
   {
     ticker: 'sei',
     name: 'Sei (SEI)',
-    image: '/uploads/sei_fda6fbd2c1.svg',
+    image: 'https://content-api.changenow.io/uploads/sei_fda6fbd2c1.svg',
     network: 'sei',
     tokenContract: null,
     legacyTicker: 'sei',
@@ -211,7 +198,7 @@ const networks_dym_sui = [
   {
     ticker: 'dym',
     name: 'Dymension (DYM)',
-    image: '/uploads/dym_7321eabaa0.svg',
+    image: 'https://content-api.changenow.io/uploads/dym_7321eabaa0.svg',
     network: 'dym',
     tokenContract: null,
     legacyTicker: 'dymmainnet',
@@ -228,18 +215,19 @@ const networks_dym_sui = [
 
 export const list_currency = [
   ...eth,
-  ...networks_btc_eth,
+  ...networks_btc_arb,
   ...networks_op_matic,
   ...networks_bsc_inj,
   ...networks_sol_ada,
   ...networks_xrp_ftm,
   ...networks_avax_tron,
   ...networks_dym_sui,
+  ...networks_tia_sei,
 ];
 
 export const list_tokens = {
   eth,
-  networks_btc_eth,
+  networks_btc_arb,
   networks_op_matic,
   networks_bsc_inj,
   networks_sol_ada,

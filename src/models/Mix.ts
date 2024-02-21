@@ -49,3 +49,55 @@ export interface CreateExchangeDto {
   type: string;
   rateId: string;
 }
+
+export interface Currecy {
+  ticker: string;
+  name: string;
+  image: string;
+  network: string;
+  tokenContract: string | null;
+  legacyTicker: string;
+}
+
+export interface MixStartDto {
+  chatId: number;
+  messageId: number;
+  states: MixDtoConversation;
+  stages: any;
+  data: Currecy;
+}
+
+export interface MixFromAndToDto {
+  chatId: number;
+  messageId: number;
+  stages: any;
+}
+
+export interface MixReceiverDto {
+  chatId: number;
+  messageId: number;
+  stages: any;
+  states: MixDtoConversation;
+}
+
+export interface MixEstimateDto {
+  chatId: number;
+  messageId: number;
+  stages: any;
+  states: MixDtoConversation;
+}
+
+export interface MixCreateOrderDto {
+  chatId: number;
+  messageId: number;
+  stages: any;
+  states: MixDtoConversation;
+  chatStates: { [key: string]: number };
+}
+
+export interface MixRefreshOrderDto {
+  chatId: number;
+  messageId: number;
+  stages: any;
+  orderId: string;
+}

@@ -190,7 +190,7 @@ const tokensFromKeyboardMarkup = [
     },
   ],
   [
-    ...list_tokens.networks_btc_eth.map((item) => ({
+    ...list_tokens.networks_btc_arb.map((item) => ({
       text: item.name,
       callback_data: JSON.stringify({
         command: CallbackInfo.MIX,
@@ -307,7 +307,7 @@ const tokensToKeyboardMarkup = [
     },
   ],
   [
-    ...list_tokens.networks_btc_eth.map((item) => ({
+    ...list_tokens.networks_btc_arb.map((item) => ({
       text: item.name,
       callback_data: JSON.stringify({
         command: CallbackInfo.MIX,
