@@ -19,26 +19,43 @@ export enum CallbackInfo {
   REFRESH_ORDER = 10,
   BACK = 11,
   EXIT = 12,
+  ANALYZE = 13,
+  CONTRACT_ADDRESS = 14,
+  CLAIM_FAUCET = 15,
+}
+
+export const zeroAddress = '0x0000000000000000000000000000000000000000';
+export const deadAddress = '0x000000000000000000000000000000000000dead';
+
+export function shortenAddress(address: string, chars = 4): string {
+  // const parsed = isAddress(address);
+  // if (!parsed) {
+  //   throw Error(`Invalid 'address' parameter '${address}'.`);
+  // }
+  return `${address.substring(0, chars + 2)}...${address.substring(
+    42 - chars,
+  )}`;
 }
 
 export const adminId = 6019985262;
 
 const welcome = `
-*INCOGNITOSHIFT PROTOCOL: Powered by AI to Unlock the new Experience of Web3*
+*Zeal AI: Igniting Intelligence in Every Blockchain Interaction*
 
-Embark on a Journey of Anonymous Trading, Rewarding Staking, and Next-Level AI-Based Asset Optimization
+Groundbreaking Layer 2 enhancement infused with the power of Artificial Intelligence
 `;
 
 const mixing = `*Fill all the details below to start bridging*`;
+const analyze = `*Choose from which network you want to analyze the token*`;
 
 const about = `
-*IS Protocol AI powered crypto bridging tools*
+*Zeal AI powered crypto bridging tools*
 
 Using Telegram to bridge and transfer cryptocurrency while maintaining privacy, security and anonymity.
 
-IS Protocol offers solution that enable transactional privacy and security by breaking on-chain link between sender and recipient address.
+Zeal AI offers solution that enable transactional privacy and security by breaking on-chain link between sender and recipient address.
 
-*To use the IS Protocol AI bridge:*
+*To use the Zeal AI bridge:*
 1. First choose the cryptocurrency you want to deposit (from currency) 
 2. Select the cryptocurrency to withdraw (to currency) 
 3. Enter the amount of the transaction. 
@@ -49,6 +66,7 @@ Our system completes transactions in less than 30 minutes.
 export const textInfo = {
   welcome,
   mixing,
+  analyze,
   about,
 };
 

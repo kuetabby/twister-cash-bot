@@ -1,3 +1,8 @@
+export interface MixCommand {
+  stages: any;
+  states: MixDtoConversation;
+  chatStates: { [key: string]: number };
+}
 export interface MixUserDto {
   [chatId: number]: MixDto;
 }

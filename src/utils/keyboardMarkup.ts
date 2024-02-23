@@ -1,19 +1,22 @@
 import { MixDto } from 'src/models/Mix';
 import { CallbackInfo } from '.';
 import { list_tokens } from './tokens';
+import { list_chain } from './chains';
 
 const startKeyboardMarkup = [
   [
     {
-      text: '🔀 Start Bridge',
+      text: '🔀 Zeal Bridge',
       callback_data: JSON.stringify({
         command: CallbackInfo.MIX,
       }),
     },
-    // {
-    //   text: '🔎 Audit Tools',
-    //   url: 'https://audit.twistercash.tech',
-    // },
+    {
+      text: '🔎 Token Analyzer',
+      callback_data: JSON.stringify({
+        command: CallbackInfo.ANALYZE,
+      }),
+    },
   ],
   [
     {
@@ -22,6 +25,14 @@ const startKeyboardMarkup = [
         command: CallbackInfo.ABOUT,
       }),
     },
+    {
+      text: '💵 Faucet',
+      callback_data: JSON.stringify({
+        command: CallbackInfo.CLAIM_FAUCET,
+      }),
+    },
+  ],
+  [
     {
       text: '🔗 Socials',
       callback_data: JSON.stringify({
@@ -35,17 +46,17 @@ const socialsKeyboardMarkup = [
   [
     {
       text: 'Website',
-      url: 'https://www.incognitoshift.com',
+      url: 'https://www.zeal-ai.net',
     },
   ],
   [
     {
       text: 'Telegram',
-      url: 'https://t.me/incognitoshift',
+      url: 'https://t.me/ZealAiPortal',
     },
     {
       text: 'Twitter / X',
-      url: 'https://x.com/incognitoshift',
+      url: 'https://x.com/Zeal_AIOfficial',
     },
     // {
     //   text: 'Medium',
@@ -152,6 +163,59 @@ const mixingEstimateKeyboardMarkup = [
   [
     {
       text: `❌ Cancel Bridging`,
+      callback_data: JSON.stringify({
+        command: CallbackInfo.EXIT,
+      }),
+    },
+  ],
+];
+
+const chainsAnalyerKeyboardMarkup = [
+  [
+    {
+      text: 'CHOOSE NETWORK',
+      callback_data: JSON.stringify({}),
+    },
+  ],
+  [
+    ...list_chain.chain_eth_bsc.map((item) => ({
+      text: item.label,
+      callback_data: JSON.stringify({
+        command: CallbackInfo.CONTRACT_ADDRESS,
+        analyzeChainId: item.chainId,
+      }),
+    })),
+  ],
+  [
+    ...list_chain.chain_arb_base.map((item) => ({
+      text: item.label,
+      callback_data: JSON.stringify({
+        command: CallbackInfo.CONTRACT_ADDRESS,
+        analyzeChainId: item.chainId,
+      }),
+    })),
+  ],
+  [
+    ...list_chain.chain_avax_polygon.map((item) => ({
+      text: item.label,
+      callback_data: JSON.stringify({
+        command: CallbackInfo.CONTRACT_ADDRESS,
+        analyzeChainId: item.chainId,
+      }),
+    })),
+  ],
+  [
+    ...list_chain.chain_ftm_op.map((item) => ({
+      text: item.label,
+      callback_data: JSON.stringify({
+        command: CallbackInfo.CONTRACT_ADDRESS,
+        analyzeChainId: item.chainId,
+      }),
+    })),
+  ],
+  [
+    {
+      text: `❌ Cancel Analyze`,
       callback_data: JSON.stringify({
         command: CallbackInfo.EXIT,
       }),
@@ -408,6 +472,7 @@ export const keyboardMarkup = {
   start: startKeyboardMarkup,
   socials: socialsKeyboardMarkup,
   mixing: mixingFormKeyboardMarkup,
+  chains: chainsAnalyerKeyboardMarkup,
   estimateExchange: mixingEstimateKeyboardMarkup,
   tokensFrom: tokensFromKeyboardMarkup,
   tokensTo: tokensToKeyboardMarkup,

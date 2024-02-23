@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "build:docker": "docker build -t is-protocol-bot ./"
+    "build:docker": "docker build -t zeai-ai-bot ./"
   },
   "dependencies": {
     "@nestjs/axios": "^3.0.1",
@@ -28,6 +28,8 @@
     "axios": "^1.6.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "ethers": "^5",
+    "ioredis": "^5.3.2",
     "node-telegram-bot-api": "^0.64.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"

@@ -3,23 +3,15 @@ import { ValidationPipe } from '@nestjs/common';
 
 import { AppModule } from './app.module';
 
-import { startMixing } from './bridge/start';
-import { fromMixing, toMixing } from './bridge/from_to';
-import { amountMixing, receiverMixing } from './bridge/receiver_amount';
-import { estimateMixing } from './bridge/estimate';
-import {
-  createOrderMixing,
-  refreshOrderMixing,
-} from './bridge/create_refresh_order';
-import {
-  amountMessageMixing,
-  receiverMessageMixing,
-} from './bridge/amount_receiver_message';
+import bridgeCommand from './bridge';
+import analyzeCommand from './analyzer';
 
 import { CallbackInfo, ChatStage, textInfo } from './utils';
 import { keyboardMarkup } from './utils/keyboardMarkup';
 
 import type { MixDtoConversation } from './models/Mix';
+import type { AnalyzeDtoConversation } from './models/Analyze';
+import faucetCommand from './faucet';
 
 const TelegramBot = require('node-telegram-bot-api');
 
@@ -32,6 +24,8 @@ let chatStates = {};
 
 let mixStates = {} as MixDtoConversation;
 let mixStage = {};
+
+let analyzeStates = {} as AnalyzeDtoConversation;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -55,17 +49,13 @@ async function bootstrap() {
 
   bot.on('message', async (msg) => {
     const chatId: number = msg.chat.id;
-    const messageId = msg.message_id;
     const messageText = msg.text;
-
-    // console.log(msg, 'msg');
-    // console.log(messageId, 'messageId');
 
     if (messageText === '/start') {
       chatStates[chatId] = ChatStage.START;
       // Path to the video file
       const videoPath =
-        'https://res.cloudinary.com/dwppcshmi/video/upload/f_auto:video,q_auto/v1/rabbit_images/rratt0pwlwpjmg2hmhnj';
+        'https://res.cloudinary.com/dwppcshmi/video/upload/f_auto:video,q_auto/v1/rabbit_images/d4qpniiqweleflvdtigw';
 
       await bot.sendVideo(chatId, videoPath, {
         parse_mode: 'Markdown',
@@ -74,26 +64,6 @@ async function bootstrap() {
           inline_keyboard: keyboardMarkup.start,
         }),
       });
-    }
-
-    if (mixStage[chatId] && mixStates[chatId]) {
-      if (mixStage[chatId] === CallbackInfo.AMOUNT) {
-        amountMessageMixing({
-          chatId,
-          messageId,
-          messageText,
-          states: mixStates,
-        });
-      }
-
-      if (mixStage[chatId] === CallbackInfo.RECEIVER) {
-        receiverMessageMixing({
-          chatId,
-          messageId,
-          messageText,
-          states: mixStates,
-        });
-      }
     }
   });
 
@@ -109,16 +79,6 @@ async function bootstrap() {
     // console.log(chatStates, 'chatStates');
 
     switch (data.command) {
-      case CallbackInfo.MIX:
-        startMixing({
-          chatId,
-          messageId: message.message_id,
-          data,
-          stages: mixStage,
-          states: mixStates,
-        });
-        break;
-
       case CallbackInfo.ABOUT:
         bot.sendMessage(chatId, textInfo.about, {
           parse_mode: 'Markdown',
@@ -135,72 +95,6 @@ async function bootstrap() {
             message_id: message.message_id,
           },
         );
-        break;
-
-      case CallbackInfo.FROM_TOKEN:
-        fromMixing({
-          chatId,
-          messageId: message.message_id,
-          stages: mixStage,
-        });
-        break;
-
-      case CallbackInfo.TO_TOKEN:
-        toMixing({
-          chatId,
-          messageId: message.message_id,
-          stages: mixStage,
-        });
-        break;
-
-      case CallbackInfo.RECEIVER:
-        receiverMixing({
-          chatId,
-          messageId: message.message_id,
-          stages: mixStage,
-          states: mixStates,
-        });
-        break;
-
-      case CallbackInfo.AMOUNT:
-        amountMixing({
-          chatId,
-          messageId: message.message_id,
-          stages: mixStage,
-          states: mixStates,
-        });
-        break;
-
-      case CallbackInfo.ESTIMATE_EXCHANGE:
-        estimateMixing({
-          chatId,
-          messageId: message.message_id,
-          stages: mixStage,
-          states: mixStates,
-        });
-        break;
-
-      case CallbackInfo.CREATE_ORDER:
-        if (mixStage[chatId] && mixStates[chatId]) {
-          createOrderMixing({
-            chatId,
-            messageId: message.message_id,
-            stages: mixStage,
-            states: mixStates,
-            chatStates,
-          });
-        }
-        break;
-
-      case CallbackInfo.REFRESH_ORDER:
-        if (data.id) {
-          refreshOrderMixing({
-            chatId,
-            messageId: message.message_id,
-            stages: mixStage,
-            orderId: data.id ?? '',
-          });
-        }
         break;
 
       case CallbackInfo.BACK:
@@ -225,6 +119,22 @@ async function bootstrap() {
       default:
         return;
     }
+  });
+
+  bridgeCommand({
+    stages: mixStage,
+    states: mixStates,
+    chatStates,
+  });
+
+  analyzeCommand({
+    stages: mixStage,
+    states: analyzeStates,
+  });
+
+  faucetCommand({
+    stages: mixStage,
+    states: analyzeStates,
   });
 
   await app.listen(3001);

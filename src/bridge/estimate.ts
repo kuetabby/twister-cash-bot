@@ -45,7 +45,7 @@ export const estimateMixing = async ({
     states[chatId].rateId = responseEstimate?.rateId;
     await bot.editMessageText(
       `
-          <b>INCOGNITOSHIFT PROTOCOL: Powered by AI to Unlock the new Experience of Web3</b>
+          <b>Zeal-AI: Igniting Intelligence in Every Blockchain Interaction</b>
 
 • Send: <b>${states[chatId].amount} ${
         list_currency.find(

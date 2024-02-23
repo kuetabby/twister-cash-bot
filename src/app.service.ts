@@ -7,15 +7,17 @@ import {
   EstimateExchangeParams,
   MixerType,
 } from './models/Mix';
+import { AnalyzeResultDto } from './models/Analyze';
 
-const changeNowKey =
-  'e7dd253a844bb1b84d69a570911edf77c3952d1ccb6bc8acc743aea2e94df12c';
+// const changeNowKey =
+//   'e7dd253a844bb1b84d69a570911edf77c3952d1ccb6bc8acc743aea2e94df12c';
 
 const baseUrl = 'https://api.changenow.io/v2';
 
-const apiKey =
-  'e7dd253a844bb1b84d69a570911edf77c3952d1ccb6bc8acc743aea2e94df12c';
-
+const apiKey = {
+  changeNow: 'e7dd253a844bb1b84d69a570911edf77c3952d1ccb6bc8acc743aea2e94df12c',
+  goPlus: '9eH13SpSxsrEtoHlgGjf',
+};
 @Injectable()
 export class AppService {
   constructor(private readonly httpService: HttpService) {}
@@ -34,7 +36,7 @@ export class AppService {
 
     const request = await this.httpService.axiosRef.get('', {
       headers: {
-        'x-api-key': changeNowKey,
+        'x-api-key': apiKey.changeNow,
       },
       maxBodyLength: Infinity,
     });
@@ -78,7 +80,7 @@ export class AppService {
           headers: {
             'Content-Type': 'application/json',
             Accept: '*/*',
-            'x-changenow-api-key': apiKey,
+            'x-changenow-api-key': apiKey.changeNow,
           },
         },
       );
@@ -164,7 +166,7 @@ export class AppService {
           headers: {
             'Content-Type': 'application/json',
             Accept: '*/*',
-            'x-changenow-api-key': apiKey,
+            'x-changenow-api-key': apiKey.changeNow,
           },
         },
       );
@@ -203,9 +205,26 @@ export class AppService {
       headers: {
         'Content-Type': 'application/json',
         Accept: '*/*',
-        'x-changenow-api-key': apiKey,
+        'x-changenow-api-key': apiKey.changeNow,
       },
     });
+
+    const response = await request.data;
+    return response;
+  }
+
+  async getResultAnalyzing(dto: AnalyzeResultDto) {
+    const request = await this.httpService.axiosRef.get(
+      `https://api.gopluslabs.io/api/v1/token_security/${dto.chainId}?contract_addresses=${dto.contractAddress}`,
+      {
+        timeout: 100000,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: '*/*',
+          'Api-Key': `Bearer ${apiKey.goPlus}`,
+        },
+      },
+    );
 
     const response = await request.data;
     return response;

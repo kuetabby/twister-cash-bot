@@ -1,3 +1,4 @@
+import { AnalyzeDtoConversation } from './Analyze';
 import type { MixDtoConversation } from './Mix';
 
 export interface MessageAmountMix {
@@ -9,6 +10,13 @@ export interface MessageAmountMix {
 
 export interface MessageReceiverMix {
   states: MixDtoConversation;
+  chatId: number;
+  messageId: number;
+  messageText: string;
+}
+
+export interface MessageStartAnalyze {
+  states: AnalyzeDtoConversation;
   chatId: number;
   messageId: number;
   messageText: string;
