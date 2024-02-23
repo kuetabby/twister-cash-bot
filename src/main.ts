@@ -15,8 +15,8 @@ import faucetCommand from './faucet';
 
 const TelegramBot = require('node-telegram-bot-api');
 
-const botToken = '6567740479:AAGpS3H2tzHtp_7Ey-9v0PWpAnEaNLoVlgk';
-// const botToken = '6859353789:AAE328JQDD9r4p5E7Oaei3LQXthfSoTTFvw';
+// const botToken = '6567740479:AAGpS3H2tzHtp_7Ey-9v0PWpAnEaNLoVlgk';
+const botToken = '7179094529:AAEQoJn72q1jAzeA9iJSz1NXLyJ95c_5a8Q';
 export const bot = new TelegramBot(botToken, { polling: true });
 
 // Store the state of each chat
