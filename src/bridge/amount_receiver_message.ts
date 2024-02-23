@@ -25,12 +25,15 @@ export const amountMessageMixing = async ({
       item.ticker === states[chatId].toToken &&
       item.network === states[chatId].toCurrency,
   ).name;
-
-  await bot.deleteMessage(chatId, messageId - 1);
+  if (chatId && messageId) {
+    await bot.deleteMessage(chatId, messageId - 1);
+  }
 
   if (isNaN(messageText)) {
     // If the user's input is not a number, ask the user for their age again
-    await bot.deleteMessage(chatId, messageId);
+    if (chatId && messageId) {
+      await bot.deleteMessage(chatId, messageId);
+    }
 
     await bot.sendMessage(
       chatId,
@@ -62,7 +65,9 @@ Example: If you have 0.1 ETH and want to convert it to USDT, just type 0.1
       },
     );
   } else {
-    await bot.deleteMessage(chatId, messageId);
+    if (chatId && messageId) {
+      await bot.deleteMessage(chatId, messageId);
+    }
 
     states[chatId].amount = messageText;
     await bot.sendMessage(chatId, textInfo.mixing, {
@@ -109,7 +114,9 @@ export const receiverMessageMixing = async ({
       item.network === states[chatId].toCurrency,
   ).name;
 
-  await bot.deleteMessage(chatId, messageId - 1);
+  if (chatId && messageId) {
+    await bot.deleteMessage(chatId, messageId - 1);
+  }
 
   const request = await appService.getAddressValidator({
     network: states[chatId].toCurrency,
@@ -147,7 +154,9 @@ export const receiverMessageMixing = async ({
         },
       );
     } else {
-      await bot.deleteMessage(chatId, messageId);
+      if (chatId && messageId) {
+        await bot.deleteMessage(chatId, messageId);
+      }
       states[chatId].receiver = messageText;
       bot.sendMessage(chatId, textInfo.mixing, {
         parse_mode: 'Markdown',

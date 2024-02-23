@@ -113,7 +113,9 @@ async function bootstrap() {
         delete chatStates[chatId];
         delete mixStates[chatId];
         delete mixStage[chatId];
-        bot.deleteMessage(chatId, message.message_id);
+        if (chatId && message.message_id) {
+          bot.deleteMessage(chatId, message.message_id);
+        }
         break;
 
       default:

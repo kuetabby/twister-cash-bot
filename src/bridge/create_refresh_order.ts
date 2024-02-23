@@ -139,7 +139,10 @@ export const refreshOrderMixing = async ({
       toNetwork: responseStatusOrder.toNetwork,
     };
 
-    await bot.deleteMessage(chatId, messageId);
+    if (chatId && messageId) {
+      await bot.deleteMessage(chatId, messageId);
+    }
+
     await bot.sendMessage(
       chatId,
       `
