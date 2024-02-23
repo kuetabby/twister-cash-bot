@@ -82,7 +82,9 @@ export const receiverMessageAnalyzing = async ({
   const response = await request;
 
   if (response?.code) {
-    bot.deleteMessage(chatId, messageId);
+    // if (stages[chatId] && messageId) {
+    //   bot.deleteMessage(chatId, messageId);
+    // }
     const result = response?.result || {};
     const isEmptyResponse = Object.keys(result).length === 0;
 
