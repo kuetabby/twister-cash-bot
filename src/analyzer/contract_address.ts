@@ -70,7 +70,7 @@ export const receiverMessageAnalyzing = async ({
   const httpService = new HttpService();
   const appService = new AppService(httpService);
 
-  if (chatId && messageId && messageId - 1) {
+  if (chatId && Boolean(messageId) && Boolean(messageId - 1)) {
     bot.deleteMessage(chatId, messageId - 1);
     bot.deleteMessage(chatId, messageId);
   }

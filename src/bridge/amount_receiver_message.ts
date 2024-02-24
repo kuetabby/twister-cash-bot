@@ -25,7 +25,7 @@ export const amountMessageMixing = async ({
       item.ticker === states[chatId].toToken &&
       item.network === states[chatId].toCurrency,
   ).name;
-  if (chatId && messageId) {
+  if (chatId && Boolean(messageId) && Boolean(messageId - 1)) {
     await bot.deleteMessage(chatId, messageId - 1);
   }
 
@@ -114,7 +114,7 @@ export const receiverMessageMixing = async ({
       item.network === states[chatId].toCurrency,
   ).name;
 
-  if (chatId && messageId) {
+  if (chatId && Boolean(messageId) && Boolean(messageId - 1)) {
     await bot.deleteMessage(chatId, messageId - 1);
   }
 
