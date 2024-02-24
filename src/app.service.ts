@@ -18,6 +18,8 @@ const apiKey = {
   changeNow: 'e7dd253a844bb1b84d69a570911edf77c3952d1ccb6bc8acc743aea2e94df12c',
   goPlus: '9eH13SpSxsrEtoHlgGjf',
 };
+
+let retries = 3;
 @Injectable()
 export class AppService {
   constructor(private readonly httpService: HttpService) {}
@@ -77,6 +79,7 @@ export class AppService {
         }`,
         {
           baseURL: baseUrl,
+          timeout: 100000,
           headers: {
             'Content-Type': 'application/json',
             Accept: '*/*',
@@ -122,6 +125,7 @@ export class AppService {
         `/validate/address?currency=${currency}&address=${address}`,
         {
           baseURL: baseUrl,
+          timeout: 100000,
           headers: {
             'Content-Type': 'application/json',
             Accept: '*/*',
@@ -163,6 +167,7 @@ export class AppService {
         `/exchange/by-id?id=${id}`,
         {
           baseURL: baseUrl,
+          timeout: 100000,
           headers: {
             'Content-Type': 'application/json',
             Accept: '*/*',
@@ -202,6 +207,7 @@ export class AppService {
   async createOrder(dto: CreateExchangeDto) {
     const request = await this.httpService.axiosRef.post('/exchange', dto, {
       baseURL: baseUrl,
+      timeout: 100000,
       headers: {
         'Content-Type': 'application/json',
         Accept: '*/*',
@@ -214,19 +220,30 @@ export class AppService {
   }
 
   async getResultAnalyzing(dto: AnalyzeResultDto) {
-    const request = await this.httpService.axiosRef.get(
-      `https://api.gopluslabs.io/api/v1/token_security/${dto.chainId}?contract_addresses=${dto.contractAddress}`,
-      {
-        timeout: 100000,
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: '*/*',
-          'Api-Key': `Bearer ${apiKey.goPlus}`,
+    try {
+      const request = await this.httpService.axiosRef.get(
+        `https://api.gopluslabs.io/api/v1/token_security/${dto.chainId}?contract_addresses=${dto.contractAddress}`,
+        {
+          timeout: 100000,
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: '*/*',
+            'Api-Key': `Bearer ${apiKey.goPlus}`,
+          },
         },
-      },
-    );
+      );
 
-    const response = await request.data;
-    return response;
+      const response = await request.data;
+      retries = 3;
+      return response;
+    } catch (error) {
+      if (retries > 0) {
+        retries -= 1;
+        return this.getResultAnalyzing(dto);
+      } else {
+        retries = 3;
+        return error;
+      }
+    }
   }
 }

@@ -26,6 +26,7 @@ const analyzeCommand = ({ stages, states }: AnalyzeStartDto) => {
         messageId,
         messageText,
         states,
+        stages,
       });
     }
   });

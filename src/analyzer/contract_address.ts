@@ -65,14 +65,16 @@ export const receiverMessageAnalyzing = async ({
   messageId,
   messageText,
   states,
+  stages,
 }: MessageStartAnalyze) => {
   const httpService = new HttpService();
   const appService = new AppService(httpService);
 
-  // console.log(messageText, 'messageText');
-  // console.log(states[chatId].analyzeChainId, 'states[chatId].analyzeChainId');
+  if (chatId && messageId && messageId - 1) {
+    bot.deleteMessage(chatId, messageId - 1);
+    bot.deleteMessage(chatId, messageId);
+  }
 
-  // await bot.deleteMessage(chatId, messageId - 1);
   await bot.sendMessage(chatId, '🤔 Analyzing...');
 
   const request = await appService.getResultAnalyzing({
@@ -82,9 +84,6 @@ export const receiverMessageAnalyzing = async ({
   const response = await request;
 
   if (response?.code) {
-    // if (stages[chatId] && messageId) {
-    //   bot.deleteMessage(chatId, messageId);
-    // }
     const result = response?.result || {};
     const isEmptyResponse = Object.keys(result).length === 0;
 
@@ -104,6 +103,10 @@ export const receiverMessageAnalyzing = async ({
           message_id: messageId,
         },
       );
+
+      if (stages[chatId]) {
+        stages[chatId] = CallbackInfo.EXIT;
+      }
     } else {
       const {
         token_name,
@@ -192,6 +195,10 @@ export const receiverMessageAnalyzing = async ({
           message_id: messageId,
         },
       );
+
+      if (stages[chatId]) {
+        stages[chatId] = CallbackInfo.EXIT;
+      }
     }
   } else {
     await bot.sendMessage(
@@ -205,5 +212,9 @@ export const receiverMessageAnalyzing = async ({
         message_id: messageId,
       },
     );
+
+    if (stages[chatId]) {
+      stages[chatId] = CallbackInfo.EXIT;
+    }
   }
 };

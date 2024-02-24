@@ -17,6 +17,7 @@ export interface MessageReceiverMix {
 
 export interface MessageStartAnalyze {
   states: AnalyzeDtoConversation;
+  stages: any;
   chatId: number;
   messageId: number;
   messageText: string;

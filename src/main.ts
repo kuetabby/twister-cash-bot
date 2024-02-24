@@ -15,8 +15,8 @@ import faucetCommand from './faucet';
 
 const TelegramBot = require('node-telegram-bot-api');
 
-// const botToken = '6567740479:AAGpS3H2tzHtp_7Ey-9v0PWpAnEaNLoVlgk';
-const botToken = '7179094529:AAEQoJn72q1jAzeA9iJSz1NXLyJ95c_5a8Q';
+const botToken = '6567740479:AAGpS3H2tzHtp_7Ey-9v0PWpAnEaNLoVlgk';
+// const botToken = '7179094529:AAEQoJn72q1jAzeA9iJSz1NXLyJ95c_5a8Q';
 export const bot = new TelegramBot(botToken, { polling: true });
 
 // Store the state of each chat
@@ -53,6 +53,21 @@ async function bootstrap() {
 
     if (messageText === '/start') {
       chatStates[chatId] = ChatStage.START;
+
+      if (!mixStates[chatId]) {
+        mixStates[chatId] = {
+          amount: '',
+          fromToken: '',
+          fromCurrency: '',
+          receiver: '',
+          toToken: '',
+          toCurrency: '',
+          rateId: '',
+          analyzeChainId: '',
+          analyzeContractAddress: '',
+        };
+      }
+
       // Path to the video file
       const videoPath =
         'https://res.cloudinary.com/dwppcshmi/video/upload/f_auto:video,q_auto/v1/rabbit_images/d4qpniiqweleflvdtigw';
