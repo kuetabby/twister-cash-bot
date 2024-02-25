@@ -8,6 +8,12 @@ import {
   MixerType,
 } from './models/Mix';
 import { AnalyzeResultDto } from './models/Analyze';
+import { TransferCoin } from './faucet/transferCoin';
+import wallet from './faucet/wallet';
+import { ethers } from 'ethers';
+import redis from './faucet/redis';
+import { CanRecieve } from './faucet/canRecieve';
+import { COOLDOWN_HOURS } from './faucet/constants';
 
 // const changeNowKey =
 //   'e7dd253a844bb1b84d69a570911edf77c3952d1ccb6bc8acc743aea2e94df12c';
@@ -244,6 +250,47 @@ export class AppService {
         retries = 3;
         return error;
       }
+    }
+  }
+
+  async canReceive(address: string): Promise<CanRecieve> {
+    // get timestamp in seconds
+    const lastRecieve = await redis.get(address);
+    // if address never been transfered to
+    if (lastRecieve === null) return { success: true, message: '🚢' };
+    // now in seconds
+    const now = Math.floor(Date.now() / 1000);
+    // cooldown in seconds
+    const cooldown = COOLDOWN_HOURS * 60 * 60;
+    // if asked for funds after cooldown
+    if (now >= parseInt(lastRecieve) + cooldown)
+      return { success: true, message: '🚢' };
+    // calculate time left in hours
+    const timeLeft = Math.ceil(
+      (parseInt(lastRecieve) + cooldown - now) / 60 / 60,
+    );
+    return {
+      success: false,
+      message: `❌ Please wait ${timeLeft} hours before requesting again`,
+    };
+  }
+
+  async transferCoin(address: string): Promise<TransferCoin> {
+    try {
+      const transaction = await wallet.sendTransaction({
+        to: address,
+        value: ethers.utils.parseEther('50.0'),
+      });
+      return {
+        success: true,
+        message: transaction.hash,
+      };
+    } catch (error) {
+      console.log(error, 'error');
+      return {
+        success: false,
+        message: 'Unable to Send Transaction',
+      };
     }
   }
 }

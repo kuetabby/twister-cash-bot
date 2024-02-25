@@ -6,4 +6,4 @@ export const COOLDOWN_HOURS = 3;
 export const VALUE = 333000000000000;
 
 export const REDIS_URI =
-  'redis://default:if4QjiFoUeQrxlk4dmqPQ3EXMwqRdI6E@redis-19117.c321.us-east-1-2.ec2.cloud.redislabs.com:19117';
+  'redis://default:QWq6En0MhBTjHexOWcdAcIoeOdtWYBnL@redis-19402.c322.us-east-1-2.ec2.cloud.redislabs.com:19402';
