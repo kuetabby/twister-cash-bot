@@ -12,6 +12,7 @@ import { keyboardMarkup } from './utils/keyboardMarkup';
 import type { MixDtoConversation } from './models/Mix';
 import type { AnalyzeDtoConversation } from './models/Analyze';
 import faucetCommand from './faucet';
+import stakingCommand from './staking';
 
 const TelegramBot = require('node-telegram-bot-api');
 
@@ -153,6 +154,11 @@ async function bootstrap() {
   });
 
   faucetCommand({
+    stages: mixStage,
+    states: analyzeStates,
+  });
+
+  stakingCommand({
     stages: mixStage,
     states: analyzeStates,
   });

@@ -31,6 +31,12 @@ const startKeyboardMarkup = [
         command: CallbackInfo.CLAIM_FAUCET,
       }),
     },
+    {
+      text: '🏦 Stake',
+      callback_data: JSON.stringify({
+        command: CallbackInfo.STAKING,
+      }),
+    },
   ],
   [
     {

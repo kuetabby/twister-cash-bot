@@ -22,6 +22,7 @@ export enum CallbackInfo {
   ANALYZE = 13,
   CONTRACT_ADDRESS = 14,
   CLAIM_FAUCET = 15,
+  STAKING = 16,
 }
 
 export const zeroAddress = '0x0000000000000000000000000000000000000000';
